@@ -7,7 +7,7 @@ lazy val akkaVersion    = "2.6.9"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
-  "com.typesafe.akka" %% "akka-stream"              % akkaVersion,
+  "com.typesafe.akka" %% "akka-stream-typed" % akkaVersion,
   "ch.qos.logback"    % "logback-classic"           % "1.2.3",
   "org.typelevel" %% "cats-core" % "2.0.0",
 
