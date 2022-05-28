@@ -13,7 +13,6 @@ libraryDependencies ++= Seq(
 
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
-
 )
 
 // scalac options come from the sbt-tpolecat plugin so need to set any here
