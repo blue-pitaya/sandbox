@@ -13,6 +13,10 @@ libraryDependencies ++= Seq(
 
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
+
+  "com.typesafe.slick" %% "slick" % "3.3.2",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
+  "org.postgresql" % "postgresql" % "42.4.0"
 )
 
 // scalac options come from the sbt-tpolecat plugin so need to set any here
