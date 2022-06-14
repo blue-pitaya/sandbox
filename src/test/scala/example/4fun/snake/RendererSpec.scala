@@ -27,4 +27,41 @@ class RendererSpec extends AnyWordSpec with Matchers {
       result2 shouldEqual expected
     }
   }
+
+  "toText" should {
+    "return empty string when map is empty" in {
+      val charMap = Map[Vec2d, Char]()
+      val expected = ""
+      val result = Renderer.toText(charMap)
+
+      result shouldEqual expected
+    }
+
+    "ignore chars on negative axies" in {
+      val charMap = Map(Vec2d(-2, -1) -> 'a', Vec2d(2, 2) -> 'b')
+      val expected = """
+      |
+      |
+      |  b
+      """.stripMargin.trim()
+      val result = Renderer.toText(charMap)
+
+      result shouldEqual expected
+    }
+
+    "return text with necessary whitespaces and newlines" in {
+      val charMap = Map[Vec2d, Char](Vec2d(2, 3) -> 'o', Vec2d(3, 3) -> 'a', Vec2d(5, 5) -> 'b')
+      val expected = """
+      |
+      |
+      |
+      |  oa
+      |
+      |      b
+      """.stripMargin.trim()
+      val result = Renderer.toText(charMap)
+
+      result shouldEqual expected
+    }
+  }
 }

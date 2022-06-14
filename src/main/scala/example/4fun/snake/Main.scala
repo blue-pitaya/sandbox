@@ -13,8 +13,6 @@ object Board {
   }
 }
 
-case class Vec2d(x: Int, y: Int)
-
 sealed trait Drawable[A] {
   def draw(value: A): Map[Vec2d, Char]
 }

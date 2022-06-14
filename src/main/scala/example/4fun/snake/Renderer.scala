@@ -49,4 +49,6 @@ object Renderer {
 
     parseChar(text)
   }
+
+  def toText(charMap: Map[Vec2d, Char]): String = "xd"
 }
