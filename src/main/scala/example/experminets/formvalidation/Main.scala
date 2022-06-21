@@ -34,7 +34,7 @@ object Main {
     val ageRules = List[Rule2[Int]]()
 
     putErrors("login", validateField(user.login, loginRules)) ++
-    putErrors("password", validateField(user.password, passwordRules)) ++
-    putErrors("age", validateField(user.age, ageRules))
+      putErrors("password", validateField(user.password, passwordRules)) ++
+      putErrors("age", validateField(user.age, ageRules))
   }
 }

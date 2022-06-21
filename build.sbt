@@ -3,20 +3,27 @@ version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.13.1"
 
-lazy val akkaVersion    = "2.6.9"
+lazy val AkkaHttpVersion = "10.2.7"
+lazy val AkkaVersion = "2.6.19"
+lazy val LogbackVersion = "1.2.11"
+
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
-  "com.typesafe.akka" %% "akka-stream-typed" % akkaVersion,
+  "com.typesafe.akka" %% "akka-actor-typed"         % AkkaVersion,
+  "com.typesafe.akka" %% "akka-stream-typed" % AkkaVersion,
   "ch.qos.logback"    % "logback-classic"           % "1.2.3",
   "org.typelevel" %% "cats-core" % "2.0.0",
 
-  "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
+  "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
 
   "com.typesafe.slick" %% "slick" % "3.3.2",
   "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
-  "org.postgresql" % "postgresql" % "42.4.0"
+  "org.postgresql" % "postgresql" % "42.4.0",
+
+  "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-testkit" % AkkaHttpVersion % Test,
 )
 
 // scalac options come from the sbt-tpolecat plugin so need to set any here
