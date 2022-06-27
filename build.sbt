@@ -24,6 +24,9 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
   "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion,
   "com.typesafe.akka" %% "akka-http-testkit" % AkkaHttpVersion % Test,
+
+  "com.typesafe.akka" %% "akka-cluster-typed" % AkkaVersion,
+  "com.typesafe.akka" %% "akka-cluster-sharding-typed" % AkkaVersion,
 )
 
 // scalac options come from the sbt-tpolecat plugin so need to set any here
