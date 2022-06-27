@@ -20,7 +20,7 @@ object Routes {
   }
 
   val main = path("ok") {
-    get {
+    (post & entity(as[String])) {
       validateData(SimpleUser("user")) { ctx =>
         ctx.complete("ok")
       }
