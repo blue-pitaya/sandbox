@@ -16,6 +16,8 @@ libraryDependencies ++= Seq(
 
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
+  "org.scalamock"     %% "scalamock"                % "5.1.0"         % Test,
+
 
   "com.typesafe.slick" %% "slick" % "3.3.2",
   "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
