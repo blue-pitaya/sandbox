@@ -1,4 +1,4 @@
-package example.`4fun`.snake
+package example.games.snake
 
 final case class Vec2d(x: Int, y: Int) {
   def +(o: Vec2d): Vec2d = Vec2d(x + o.x, y + o.y)

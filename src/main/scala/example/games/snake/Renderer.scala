@@ -1,4 +1,4 @@
-package example.`4fun`.snake
+package example.games.snake
 
 object Renderer {
   implicit class StringToCharMap(s: String) {

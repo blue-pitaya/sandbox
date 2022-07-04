@@ -1,4 +1,4 @@
-package example.`4fun`.snake
+package example.games.snake
 
 case class Board(width: Int, height: Int)
 
