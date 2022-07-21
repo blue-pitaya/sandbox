@@ -2,6 +2,8 @@ package example.`4fun`.snake
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import example.games.snake.Renderer
+import example.games.snake.Vec2d
 
 class RendererSpec extends AnyWordSpec with Matchers {
   "toCharMap" should {
