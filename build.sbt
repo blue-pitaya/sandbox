@@ -1,35 +1,46 @@
-name := "cats-examples"
-version := "0.0.1-SNAPSHOT"
+lazy val akkaHttpVersion = "10.2.7"
+lazy val akkaVersion = "2.6.19"
 
-scalaVersion := "2.13.1"
-
-lazy val AkkaHttpVersion = "10.2.7"
-lazy val AkkaVersion = "2.6.19"
-lazy val LogbackVersion = "1.2.11"
-
-
-libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor-typed"         % AkkaVersion,
-  "com.typesafe.akka" %% "akka-stream-typed" % AkkaVersion,
+val standardDependencies = Seq(
+  "com.typesafe.akka" %% "akka-stream-typed" % akkaVersion,
   "ch.qos.logback"    % "logback-classic"           % "1.2.3",
   "org.typelevel" %% "cats-core" % "2.0.0",
 
-  "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion     % Test,
+  "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
   "org.scalamock"     %% "scalamock"                % "5.1.0"         % Test,
-
 
   "com.typesafe.slick" %% "slick" % "3.3.2",
   "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
   "org.postgresql" % "postgresql" % "42.4.0",
 
-  "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-testkit" % AkkaHttpVersion % Test,
+  "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
 
-  "com.typesafe.akka" %% "akka-cluster-typed" % AkkaVersion,
-  "com.typesafe.akka" %% "akka-cluster-sharding-typed" % AkkaVersion,
+  "com.typesafe.akka" %% "akka-cluster-typed" % akkaVersion,
+  "com.typesafe.akka" %% "akka-cluster-sharding-typed" % akkaVersion,
 )
 
-// scalac options come from the sbt-tpolecat plugin so need to set any here
-// addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
+lazy val standard: Project = (project in file("standard"))
+  .settings(
+    libraryDependencies ++= standardDependencies,
+    organization := "example",
+    scalaVersion := "2.13.8",
+  )
+
+lazy val scalajs: Project = (project in file("scalajs"))
+  .settings(
+    organization := "example",
+    scalaVersion := "2.13.8",
+    Compile / mainClass := Some("example.Main"),
+    scalaJSUseMainModuleInitializer := true
+  )
+  .enablePlugins(ScalaJSPlugin)
+
+lazy val rootProject = (project in file("."))
+  .settings(
+    name := "sandbox",
+  )
+  .aggregate(standard, scalajs)
+
