@@ -4,7 +4,8 @@ lazy val akkaVersion = "2.6.19"
 val standardDependencies = Seq(
   "com.typesafe.akka" %% "akka-stream-typed" % akkaVersion,
   "ch.qos.logback"    % "logback-classic"           % "1.2.3",
-  "org.typelevel" %% "cats-core" % "2.0.0",
+  "org.typelevel" %% "cats-effect" % "3.3.14",
+
 
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
