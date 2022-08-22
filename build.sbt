@@ -35,7 +35,8 @@ lazy val scalajs: Project = (project in file("scalajs"))
     organization := "example",
     scalaVersion := "2.13.8",
     Compile / mainClass := Some("example.Main"),
-    scalaJSUseMainModuleInitializer := true
+    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) }
+    //scalaJSUseMainModuleInitializer := true
   )
   .enablePlugins(ScalaJSPlugin)
 
