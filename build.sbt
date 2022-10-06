@@ -1,6 +1,7 @@
 lazy val akkaHttpVersion = "10.2.7"
 lazy val akkaVersion = "2.6.19"
 
+
 val standardDependencies = Seq(
   "com.typesafe.akka" %% "akka-stream-typed" % akkaVersion,
   "ch.qos.logback"    % "logback-classic"           % "1.2.3",
@@ -28,6 +29,7 @@ lazy val standard: Project = (project in file("standard"))
     libraryDependencies ++= standardDependencies,
     organization := "example",
     scalaVersion := "2.13.8",
+    run / fork := true
   )
 
 lazy val scalajs: Project = (project in file("scalajs"))
