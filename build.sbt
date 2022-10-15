@@ -1,12 +1,15 @@
 lazy val akkaHttpVersion = "10.2.7"
 lazy val akkaVersion = "2.6.19"
-
+lazy val http4sVersion = "0.23.16"
+lazy val http4sBlazeVersion = "0.23.12"
+lazy val sttpVersion = "3.7.4"
+lazy val tapirVersion = "1.0.4"
 
 val standardDependencies = Seq(
   "com.typesafe.akka" %% "akka-stream-typed" % akkaVersion,
   "ch.qos.logback"    % "logback-classic"           % "1.2.3",
   "org.typelevel" %% "cats-effect" % "3.3.14",
-
+  "org.typelevel" %% "cats-core" % "2.8.0",
 
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
   "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test,
@@ -22,29 +25,31 @@ val standardDependencies = Seq(
 
   "com.typesafe.akka" %% "akka-cluster-typed" % akkaVersion,
   "com.typesafe.akka" %% "akka-cluster-sharding-typed" % akkaVersion,
+
+  "org.http4s" %% "http4s-circe" % http4sVersion,
+  "org.http4s" %% "http4s-dsl" % http4sVersion,
+  "org.http4s" %% "http4s-blaze-server" % http4sBlazeVersion,
+  "io.circe" %% "circe-generic" % "0.14.3",
+  "com.softwaremill.sttp.client3" %% "async-http-client-backend-fs2" % sttpVersion,
+  "com.softwaremill.sttp.client3" %% "slf4j-backend" % sttpVersion,
+  "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % tapirVersion,
+  "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server" % tapirVersion,
+  // https://mvnrepository.com/artifact/co.fs2/fs2-core
+  "co.fs2" %% "fs2-core" % "3.3.0",
+  "co.fs2" %% "fs2-io" % "3.3.0",
+  "co.fs2" %% "fs2-reactive-streams" % "3.3.0"
 )
 
-lazy val standard: Project = (project in file("standard"))
-  .settings(
-    libraryDependencies ++= standardDependencies,
-    organization := "example",
-    scalaVersion := "2.13.8",
-    run / fork := true
-  )
-
-lazy val scalajs: Project = (project in file("scalajs"))
-  .settings(
-    organization := "example",
-    scalaVersion := "2.13.8",
-    Compile / mainClass := Some("example.Main"),
-    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) }
-    //scalaJSUseMainModuleInitializer := true
-  )
-  .enablePlugins(ScalaJSPlugin)
-
-lazy val rootProject = (project in file("."))
+lazy val root = (project in file("."))
   .settings(
     name := "sandbox",
   )
-  .aggregate(standard, scalajs)
+  .settings(
+    libraryDependencies ++= standardDependencies,
+    addCompilerPlugin("org.typelevel" % "kind-projector" % "0.13.2" cross CrossVersion.full),
+    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
+    organization := "example",
+    scalaVersion := "2.13.8",
+    //run / fork := true
+  )
 
