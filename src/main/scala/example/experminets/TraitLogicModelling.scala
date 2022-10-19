@@ -47,5 +47,6 @@ object TraitLogicModelling extends App {
 
   def saveToMemory2(memory: Memory, e: MemoryEvent): Memory = e match {
     case IncrementCounter(n) => ???
+    case _                   => ???
   }
 }
