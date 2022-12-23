@@ -40,6 +40,12 @@ val standardDependencies = Seq(
   "co.fs2" %% "fs2-reactive-streams" % "3.3.0"
 )
 
+lazy val baseSettings = Seq(
+  organization := "example",
+  scalaVersion := "2.13.8",
+  version := "0.1"
+)
+
 lazy val root = (project in file("."))
   .settings(
     name := "sandbox",
@@ -52,4 +58,30 @@ lazy val root = (project in file("."))
     scalaVersion := "2.13.8",
     //run / fork := true
   )
+
+import org.scalajs.linker.interface.ESVersion
+import org.scalajs.linker.interface.OutputPatterns
+import org.scalajs.linker.interface.ModuleSplitStyle
+
+lazy val laminarProject = (project in file("laminar"))
+  .settings(baseSettings)
+  .settings(
+    name := "laminar-examples",
+    scalacOptions := Seq(
+      //"-Xlint"
+    ),
+    libraryDependencies += "com.raquo" %%% "laminar" % "0.14.5",
+    scalaJSLinkerConfig ~= {
+      _.withModuleKind(ModuleKind.ESModule)
+        .withOutputPatterns(OutputPatterns.fromJSFile("%s.js"))
+        .withESFeatures(_.withESVersion(ESVersion.ES2021))
+    },
+    scalaJSUseMainModuleInitializer := true,
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory :=
+      baseDirectory.value / "ui/src/scala/",
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory :=
+      baseDirectory.value / "ui/src/scala/"
+    // Test / fastLinkJS / scalaJSLinkerOutputDirectory := baseDirectory.value / "ui/src/scalajs/test-target/",
+  )
+  .enablePlugins(ScalaJSPlugin) 
 
