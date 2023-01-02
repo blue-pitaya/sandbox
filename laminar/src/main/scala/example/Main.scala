@@ -24,5 +24,5 @@ object Main extends App {
 
   val containerNode = dom.document.querySelector("#app")
 
-  render(containerNode, component())
+  render(containerNode, CombinedSignal.component)
 }
